@@ -1,0 +1,30 @@
+[project]
+name = "llm_from_scratch"
+version = "0.1.0"
+description = "Implementation of LLM from scratch book."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "strictyaml",
+    "torch",
+]
+
+# [project.scripts]
+# pnc_mcp = "llm_from_scratch.llm_from_scratch:main"
+# 
+# [tool.uv]
+# package = true
+
+[dependency-groups]
+build = ["pyright", "ruff"]
+dev =  ["pytest-cov", "pytest", "pytest-dependency"]
+
+[tool.pyright]
+include = ["llm_from_scratch"]
+exclude = ["tests"]
+typeCheckingMode = "strict"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--cov=llm_from_scratch",
+]
