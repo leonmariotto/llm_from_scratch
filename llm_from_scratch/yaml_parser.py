@@ -2,14 +2,15 @@
 Module YamlParser
 """
 
-# import logging
+import logging
 from typing import Dict
 import strictyaml
+from collections.abc import Mapping
 
-# logging.basicConfig(
-#     level=logging.DEBUG,
-#     format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
-# )
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+)
 
 
 class YamlParserError(Exception):
@@ -27,23 +28,24 @@ class YamlParser:
         """
         Init YamlParser
         """
-        #        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger(__name__)
         self.data: Dict = {}
 
     def parse(self, path: str):
-        #        self.logger.debug("Parse YAML file [%s]", path)
+        self.logger.debug("Parse YAML file [%s]", path)
 
         # Read file content into string
         try:
             with open(path, "r", encoding="utf-8") as yaml_file:
                 yaml_text = yaml_file.read()
         except OSError as err:
-            #            self.logger.error("Error opening the file [%s]", path)
+            self.logger.error("Error opening the file [%s]", path)
             raise YamlParserError from err
         # Validate YAML and parse it into a dict
         try:
             yaml_data = strictyaml.load(yaml_text).data
         except strictyaml.YAMLError as err:
-            #            self.logger.error("Error parsing the yaml [%s]", path)
+            self.logger.error("Error parsing the yaml [%s]", path)
             raise YamlParserError from err
-        self.data.update(yaml_data)
+        if isinstance(yaml_data, Mapping):
+            self.data.update(yaml_data)

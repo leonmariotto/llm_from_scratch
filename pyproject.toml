@@ -5,8 +5,10 @@ description = "Implementation of LLM from scratch book."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "ruff",
     "strictyaml",
     "torch",
+    "tiktoken",
 ]
 
 # [project.scripts]
@@ -23,6 +25,8 @@ dev =  ["pytest-cov", "pytest", "pytest-dependency"]
 include = ["llm_from_scratch"]
 exclude = ["tests"]
 typeCheckingMode = "strict"
+venvPath = "."
+venv = ".venv"
 
 [tool.pytest.ini_options]
 addopts = [
