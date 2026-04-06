@@ -28,6 +28,9 @@ typeCheckingMode = "strict"
 venvPath = "."
 venv = ".venv"
 
+[tool.ruff]
+exclude = ["tests"]
+
 [tool.pytest.ini_options]
 addopts = [
     "--cov=llm_from_scratch",

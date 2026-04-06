@@ -1,5 +1,8 @@
 all: format pyright build pytest
 
+check:
+	uv run ruff check
+
 build:
 	uv build
 
