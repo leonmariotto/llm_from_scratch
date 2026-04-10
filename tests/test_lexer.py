@@ -1,10 +1,10 @@
 import pytest
 
-from ..llm_from_scratch.byte_pair_encoding import *
+from ..llm_from_scratch.lexer import *
 
 
-def test_basic():
-    bpe = BPE()
+def test_bpe():
+    bpe = Lexer()
     s = "Hello !"
     t = bpe.encode(s)
     r = bpe.decode(t)

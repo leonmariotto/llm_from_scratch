@@ -1,5 +1,5 @@
 """
-Use tiktoken library to do a Byte Pair Encoding on input text.
+Use tiktoken library to do transform input text into tokens.
 """
 
 import logging
@@ -14,14 +14,12 @@ logging.basicConfig(
 )
 
 
-class BPE:
+class Lexer:
     """
-    Byte Pair Encoding.
+    Default algorithm is BPE (byte paire encoding, gpt2).
     """
 
     def __init__(self, encoding: str = "gpt2"):
-        self.data_str: str = ""
-        self.data_tok: List[int] = []
         self.tiktok = tiktoken.get_encoding(encoding)
         self.logger = logging.getLogger(__name__)
         self.logger.debug(
@@ -31,9 +29,9 @@ class BPE:
         )
 
     def encode(self, in_str: str) -> List[int]:
-        self.logger.debug("BPE.encode %d char", len(in_str))
+        self.logger.debug("encode %d char", len(in_str))
         return self.tiktok.encode(in_str, allowed_special={"<|endoftext|>"})
 
     def decode(self, in_tok: List[int]) -> str:
-        self.logger.debug("BPE.decode %d token", len(in_tok))
+        self.logger.debug("decode %d token", len(in_tok))
         return self.tiktok.decode(in_tok)
