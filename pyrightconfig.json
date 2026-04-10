@@ -1,4 +1,6 @@
 {
+  "include": ["llm_from_scratch"],
+  "exclude": ["tests"],
   "venvPath": ".",
   "venv": ".venv"
 }

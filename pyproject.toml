@@ -23,11 +23,7 @@ build = ["pyright", "ruff"]
 dev =  ["pytest-cov", "pytest", "pytest-dependency"]
 
 [tool.pyright]
-include = ["llm_from_scratch"]
-exclude = ["tests"]
 typeCheckingMode = "strict"
-venvPath = "."
-venv = ".venv"
 
 [tool.ruff]
 exclude = ["tests"]
