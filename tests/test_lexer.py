@@ -33,7 +33,7 @@ Jusqu'à la saison nouvelle.
 """
 
 
-def test_gpt2_round_trip_on_poem() -> None:
+def test_gpt2_round_trip_on_poem():
     # The baseline contract: encoding followed by decoding must preserve the text.
     lexer = Lexer()
 
@@ -43,7 +43,7 @@ def test_gpt2_round_trip_on_poem() -> None:
     assert lexer.token_count(LA_CIGALE_ET_LA_FOURMI) == len(tokens)
 
 
-def test_describe_exposes_tiktoken_metadata() -> None:
+def test_describe_exposes_tiktoken_metadata():
     # Metadata should expose the key encoder facts needed for debugging and reporting.
     lexer = Lexer("gpt2")
 
@@ -56,7 +56,7 @@ def test_describe_exposes_tiktoken_metadata() -> None:
     assert "<|endoftext|>" in description["special_tokens"]
 
 
-def test_debug_tokens_exposes_decoding_information() -> None:
+def test_debug_tokens_exposes_decoding_information():
     # Per-token debug entries should be rich enough to reconstruct the original text.
     lexer = Lexer("gpt2")
 
@@ -69,7 +69,7 @@ def test_debug_tokens_exposes_decoding_information() -> None:
     assert "".join(token_info["text"] for token_info in debug_tokens) == "La Cigale"
 
 
-def test_encode_and_encode_ordinary_match_without_special_tokens() -> None:
+def test_encode_and_encode_ordinary_match_without_special_tokens():
     # Without special markers in the input, both code paths should produce the same tokens.
     lexer = Lexer("gpt2")
 
@@ -79,7 +79,7 @@ def test_encode_and_encode_ordinary_match_without_special_tokens() -> None:
     assert encoded == ordinary_encoded
 
 
-def test_end_of_text_special_token_is_supported() -> None:
+def test_end_of_text_special_token_is_supported():
     # The lexer explicitly allows the GPT end-of-text special token during encoding.
     lexer = Lexer("gpt2")
     text = "La cigale<|endoftext|>La fourmi"
@@ -90,7 +90,7 @@ def test_end_of_text_special_token_is_supported() -> None:
     assert lexer.decode(encoded) == text
 
 
-def test_multiple_tiktoken_encodings_round_trip_on_poem() -> None:
+def test_multiple_tiktoken_encodings_round_trip_on_poem():
     # Different BPE vocabularies should all round-trip the poem, even if token counts differ.
     encodings: List[EncodingName] = ["gpt2", "r50k_base", "p50k_base", "cl100k_base", "o200k_base"]
 
